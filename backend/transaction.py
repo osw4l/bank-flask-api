@@ -19,7 +19,6 @@ class Account(object):
     pin: int
     balance: int
     collection: Collection
-    deposit: int
     money: int
     is_valid: bool
     queryMongo = {}
@@ -33,6 +32,7 @@ class Account(object):
             'user_id': self.user_id,
             'pin': self.pin
         }
+        self.money = 0
         self.set_balance()
 
     def set_balance(self):
