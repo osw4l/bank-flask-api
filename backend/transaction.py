@@ -57,7 +57,7 @@ class Account(object):
 
     def withdraw_in_cop(self):
         money = self.money
-        self.money = self.get_account_balance() - money
+        self.money = round(self.get_account_balance() - money, 2)
         self.update_db_balance()
 
     def deposit_money(self):
