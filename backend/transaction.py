@@ -170,14 +170,12 @@ def launch_transactions_set(trigger, steps, collection):
                 parent = sequences[parent_id].get('params')
                 sequence['params'][paramName] = parent.get(paramName)
 
-    result = None, None
     for _, sequence in sequences.items():
         if 'action' not in sequence.keys():
             for transition in sequence.get('transitions', []):
                 target_step = transition.get('target')
                 step = sequences.get(target_step)
-                result = run_step(step, sequences, controller, actions, account)
-    return result
+                run_step(step, sequences, controller, actions, account)
 
 
 def start_transaction(collection, data):

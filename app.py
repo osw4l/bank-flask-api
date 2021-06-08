@@ -57,11 +57,6 @@ def new_account():
 
 @app.route('/transaction', methods=['POST', 'GET'])
 def transaction():
-    context = {
-        'result': None,
-        'message': None
-    }
-
     if request.method == 'POST':
         file = request.files.get('file')
         if file:
@@ -70,13 +65,11 @@ def transaction():
             try:
                 data = json.loads(file_data)
             except ValueError:
-                context['result'] = False
-                context['message'] = INVALID_JSON_FILE
                 raise_exception(INVALID_JSON_FILE)
 
             start_transaction(collection=db.accounts, data=data)
 
-    return render_template('transaction.html', context=context)
+    return render_template('transaction.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
