@@ -7,6 +7,7 @@ from pymongo import MongoClient
 
 from backend.transaction import start_transaction
 from backend.utils import trim
+from backend.validators import raise_exception
 
 app = Flask('bank_api')
 
@@ -71,6 +72,8 @@ def transaction():
             except ValueError:
                 context['result'] = False
                 context['message'] = INVALID_JSON_FILE
+                raise_exception(INVALID_JSON_FILE)
+
             start_transaction(collection=db.accounts, data=data)
 
     return render_template('transaction.html', context=context)
