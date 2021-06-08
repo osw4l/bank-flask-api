@@ -10,15 +10,9 @@
         <div class="row">
             <form action="/transaction" method="POST" enctype="multipart/form-data">
                 <div class="col-md-4 offset-md-4">
-                    {% if context.result == False %}
-                        <div class="alert alert-danger">
-                            <strong>Error</strong>, {{ context.message }}
-                        </div>
-                    {% else %}
-                        <div class="alert alert-info">
-                            <strong>Please</strong>, Choose any file to continue
-                        </div>
-                    {% endif %}
+                    <div class="alert alert-info">
+                        <strong>Please</strong>, Choose any file to continue
+                    </div>
                     <div class="card d-flex justify-content-center">
                         <div class="card-header">
                             Transactions
