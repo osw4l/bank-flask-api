@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block main %}
+    <div class="container">
+
+        {% if context.result == None  or context.result == False %}
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="text-center">Add New Account</h2>
+                </div>
+            </div>
+            <div class="row">
+                <form action="/new_account" method="POST">
+                    <div class="col-md-4 offset-md-4">
+                        {% if context.result == False %}
+                            <div class="alert alert-danger">
+                                <strong>Error</strong>, {{ context.message }}
+                            </div>
+                        {% else %}
+                            <div class="alert alert-info">
+                                <strong>Please</strong>, Fill all the fields
+                            </div>
+                        {% endif %}
+                        <div class="card d-flex justify-content-center">
+                            <div class="card-header">
+                                New Account
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <input type="text"
+                                           placeholder="User Id"
+                                           name="user_id"
+                                           id="user_id"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="number"
+                                           placeholder="Pin"
+                                           name="pin"
+                                           id="pin"
+                                           max="9999"
+                                           min="0000"
+                                           maxlength="4"
+                                           class="form-control">
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12 d-flex justify-content-center">
+                                        <button class="btn btn-info btn-block " type="submit">
+                                            Save Account
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        {% elif context.result == True %}
+            <div class="row">
+                <div class="col-md-4 offset-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="text-center">
+                                Account created
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <img src="https://cdn.dribbble.com/users/571236/screenshots/2888472/happystate.gif" alt=""
+                                 width="100%">
+                        </div>
+                        <div class="card-footer d-flex justify-content-center">
+                            <a href="/transaction" class="btn btn-outline-success btn-block">
+                                Start Transaction
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

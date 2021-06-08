@@ -1,0 +1,27 @@
+version: '2'
+
+networks:
+  mongo_network:
+
+services:
+  backend:
+    build: .
+    env_file: .env
+    command: python -u app.py
+    restart: on-failure
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    networks:
+      - mongo_network
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=bank
+      - MONGO_INITDB_ROOT_PASSWORD=bank
+      - MONGO_INITDB_DATABASE=bank_db
+    ports:
+      - '27000:27017'
+    networks:
+      - mongo_network
